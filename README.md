@@ -25,7 +25,7 @@ The original workbook is committed at:
 
 Runtime data is generated from **Sheet1** into:
 
-`data/foods.json`
+`data/manifest.json` + `data/part*.csv`
 
 Current normalized dataset:
 
@@ -45,7 +45,7 @@ No third-party Python packages are required.
 python3 scripts/import-foods.py
 ```
 
-Verify that the committed JSON exactly matches the workbook:
+Verify that the committed runtime data exactly matches the workbook:
 
 ```bash
 python3 scripts/import-foods.py --check
@@ -53,7 +53,7 @@ python3 scripts/import-foods.py --check
 
 ## Run locally
 
-Because the browser loads `data/foods.json` with `fetch`, use a local HTTP server instead of opening `index.html` directly:
+Because the browser loads the manifest and CSV chunks with `fetch`, use a local HTTP server instead of opening `index.html` directly:
 
 ```bash
 python3 -m http.server 8000
@@ -82,7 +82,7 @@ Deployment is configured in:
 Every push to `main`:
 
 1. checks out the repository,
-2. verifies `data/foods.json` against the XLSX source,
+2. verifies the generated manifest and CSV chunks against the XLSX source,
 3. runs the Node test suite,
 4. uploads the static site,
 5. deploys it to GitHub Pages.

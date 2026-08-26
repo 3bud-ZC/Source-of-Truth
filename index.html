@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#143d2b" />
+  <meta name="description" content="محلل أغذية سريع مبني على جدول Food Composition Tables for Egypt." />
+  <title>محلل الأغذية المصري</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='22' width='100' height='100' fill='%23143d2b'/><path d='M28 64c0-20 12-35 31-35 7 0 12 2 16 5-2 23-14 38-34 38-5 0-9-3-13-8Z' fill='%23f3f7f4'/><path d='M33 69c9-13 21-23 36-29' stroke='%23143d2b' stroke-width='5' fill='none'/></svg>">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <noscript>هذا الموقع يحتاج JavaScript للعمل.</noscript>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">غ</div>
+        <div>
+          <h1>محلل الأغذية المصري</h1>
+          <p>تحليل سريع للوجبات بالجرام — بدون حسابات يدوية</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="printBtn" type="button">طباعة</button>
+        <button class="btn btn-ghost" id="exportCsvBtn" type="button">CSV تصدير</button>
+        <button class="btn btn-primary" id="targetsBtn" type="button">القيم المرجعية</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell main-layout">
+    <section class="panel control-panel" aria-labelledby="analysisHeading">
+      <div class="panel-heading">
+        <div>
+          <span class="eyebrow">التحليل الحالي</span>
+          <h2 id="analysisHeading">أضف الأصناف وحدد الكمية</h2>
+        </div>
+        <div class="day-controls">
+          <label class="sr-only" for="daySelect">اليوم المحفوظ</label>
+          <select id="daySelect" class="select" aria-label="اختيار اليوم"></select>
+          <button class="icon-btn" id="newDayBtn" title="يوم جديد" aria-label="إنشاء يوم جديد">＋</button>
+          <button class="icon-btn" id="renameDayBtn" title="إعادة تسمية اليوم" aria-label="إعادة تسمية اليوم">✎</button>
+          <button class="icon-btn" id="duplicateDayBtn" title="نسخ اليوم" aria-label="نسخ اليوم الحالي">⧉</button>
+          <button class="icon-btn danger-soft" id="deleteDayBtn" title="حذف اليوم" aria-label="حذف اليوم الحالي">⌫</button>
+        </div>
+      </div>
+
+      <div class="search-grid">
+        <div class="search-wrap">
+          <label for="foodSearch">ابحث عن صنف غذائي</label>
+          <div class="search-input-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="foodSearch" type="search" autocomplete="off" placeholder="مثال: Rice, Bread, Chicken..." />
+            <kbd>/</kbd>
+          </div>
+          <div id="searchResults" class="search-results" hidden></div>
+        </div>
+
+        <div>
+          <label for="categorySelect">التصنيف</label>
+          <select id="categorySelect" class="select">
+            <option value="">كل التصنيفات</option>
+          </select>
+        </div>
+
+        <div class="selected-stat">
+          <span>عدد الأصناف</span>
+          <strong id="selectedCount">٠</strong>
+        </div>
+
+        <button id="clearDayBtn" class="btn btn-danger-outline" type="button">مسح اليوم</button>
+      </div>
+
+      <p class="data-note">
+        البيانات الغذائية من <b>Food Composition Tables for Egypt — Sheet1</b>. القيم محسوبة تناسبيًا حسب الوزن المدخل.
+      </p>
+      <div id="traceNotice" class="trace-notice" hidden>
+        يوجد صنف يحتوي قيمة <b>T (Trace)</b> في المصدر. نحافظ عليها كقيمة نوعية ولا نضيف رقمًا مخترعًا للإجمالي.
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="ملخص التحليل">
+      <article class="summary-card accent"><span>السعرات</span><strong id="sumEnergy">٠</strong><small>kcal</small></article>
+      <article class="summary-card"><span>البروتين</span><strong id="sumProtein">٠</strong><small>g</small></article>
+      <article class="summary-card"><span>الكربوهيدرات</span><strong id="sumCarbs">٠</strong><small>g</small></article>
+      <article class="summary-card"><span>الدهون</span><strong id="sumFats">٠</strong><small>g</small></article>
+      <article class="summary-card"><span>الألياف</span><strong id="sumFiber">٠</strong><small>g</small></article>
+    </section>
+
+    <section class="panel analysis-panel">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">تفاصيل العناصر</span>
+          <h2>جدول التحليل الغذائي</h2>
+        </div>
+        <span class="table-hint">اسحب الجدول أفقيًا لرؤية العناصر الدقيقة</span>
+      </div>
+
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">＋</div>
+        <h3>ابدأ بإضافة أول صنف</h3>
+        <p>ابحث من الأعلى، اضغط على الصنف، ثم عدّل الوزن بالجرام. كل القيم والإجماليات ستتحدث فورًا.</p>
+      </div>
+
+      <div id="desktopTableWrap" class="table-wrap" hidden>
+        <table class="nutrition-table">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot id="tableFoot"></tfoot>
+        </table>
+      </div>
+
+      <div id="mobileCards" class="mobile-cards" hidden></div>
+    </section>
+
+    <section class="panel targets-summary-panel">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">مقارنة اختيارية</span>
+          <h2>الإجمالي مقابل القيم المرجعية</h2>
+        </div>
+        <button class="btn btn-secondary" id="targetsBtn2" type="button">تعديل القيم</button>
+      </div>
+      <p class="disclaimer">القيم المرجعية التي تدخلها هنا قابلة للتعديل ولا تمثل توصية طبية شخصية.</p>
+      <div class="reference-grid" id="referenceGrid"></div>
+    </section>
+
+    <section class="footer-strip">
+      <div>
+        <b>خصوصيتك محفوظة</b>
+        <span>بيانات الأيام والتحليلات تُحفظ داخل متصفحك فقط ولا تُرسل إلى خادم.</span>
+      </div>
+      <div class="footer-actions">
+        <button class="link-btn" id="backupBtn" type="button">تصدير نسخة JSON</button>
+        <label class="link-btn file-label">استيراد نسخة JSON<input id="restoreInput" type="file" accept="application/json,.json" hidden /></label>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="targetsDialog" class="dialog">
+    <form method="dialog" class="dialog-card" id="targetsForm">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">إعدادات شخصية</span>
+          <h2>القيم المرجعية اليومية</h2>
+        </div>
+        <button class="icon-btn" value="cancel" aria-label="إغلاق">×</button>
+      </div>
+      <p>أدخل فقط القيم التي تريد المقارنة بها. اترك أي خانة فارغة لإخفاء المقارنة الخاصة بها.</p>
+      <div id="targetsInputs" class="targets-inputs"></div>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-ghost" id="clearTargetsBtn">مسح القيم</button>
+        <div>
+          <button value="cancel" class="btn btn-secondary">إلغاء</button>
+          <button value="save" class="btn btn-primary" id="saveTargetsBtn">حفظ</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

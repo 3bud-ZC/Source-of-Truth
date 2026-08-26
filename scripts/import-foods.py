@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Normalize Sheet1 from the source XLSX into split runtime CSV files using stdlib only."""
+"""Normalize Sheet1 from the source XLSX into chunked runtime CSV files using stdlib only."""
 from __future__ import annotations
 import argparse, csv, io, json, re, sys, zipfile
 from collections import OrderedDict
@@ -33,6 +33,12 @@ FIELDS = [
     "vitaminB1","vitaminB2"
 ]
 HEADER = ["sourceNumber","sourceRow","categoryId","category","name",*FIELDS]
+CHUNK_GROUPS = [
+    ["c01","c02","c03","c04"],
+    ["c05","c06","c07","c08"],
+    ["c09","c10","c11","c12"],
+    ["c13","c14","c15"],
+]
 NS = {
     "m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
@@ -134,19 +140,27 @@ def csv_text(rows):
 def outputs(source: Path):
     categories, rows_by_category = build(source)
     files = {}
-    manifest_files = []
+    chunks = []
+    for idx, group in enumerate(CHUNK_GROUPS, 1):
+        rows = []
+        for cid in group:
+            rows.extend(rows_by_category[cid])
+        filename = f"part{idx}.csv"
+        files[filename] = csv_text(rows)
+        chunks.append({"file": filename, "count": len(rows)})
+
+    category_manifest = []
     for cat in categories:
-        cid = cat["id"]
-        filename = f"{cid}.csv"
-        files[filename] = csv_text(rows_by_category[cid])
-        manifest_files.append({**cat, "file": filename, "count": len(rows_by_category[cid])})
+        category_manifest.append({**cat, "count": len(rows_by_category[cat["id"]])})
+
     manifest = {
         "title": "Food Composition tables For Egypt",
         "sheet": "Sheet1",
         "foodCount": sum(len(v) for v in rows_by_category.values()),
         "categoryCount": len(categories),
         "basisGrams": 100,
-        "files": manifest_files,
+        "categories": category_manifest,
+        "chunks": chunks,
     }
     files["manifest.json"] = json.dumps(manifest, ensure_ascii=False, separators=(",", ":")) + "\n"
     return files, manifest
@@ -176,7 +190,7 @@ def main():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     for name, content in built.items():
         (DATA_DIR / name).write_text(content, encoding="utf-8")
-    print(f"Wrote {manifest['foodCount']} foods across {manifest['categoryCount']} category files.")
+    print(f"Wrote {manifest['foodCount']} foods into {len(manifest['chunks'])} runtime chunks.")
 
 if __name__ == "__main__":
     main()

@@ -422,7 +422,7 @@ async function init() {
     const manifestRes = await fetch("./data/manifest.json");
     if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
     const manifest = await manifestRes.json();
-    const csvTexts = await Promise.all(manifest.files.map(async (entry) => {
+    const csvTexts = await Promise.all(manifest.chunks.map(async (entry) => {
       const res = await fetch(`./data/${entry.file}`);
       if (!res.ok) throw new Error(`${entry.file} HTTP ${res.status}`);
       return res.text();

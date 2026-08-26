@@ -97,7 +97,9 @@ export function parseFoodCsv(text) {
 }
 
 export function assembleFoodDatabase(manifest, csvTexts) {
-  if (!manifest || !Array.isArray(manifest.files)) throw new Error("Invalid food manifest");
+  if (!manifest || !Array.isArray(manifest.chunks) || !Array.isArray(manifest.categories)) {
+    throw new Error("Invalid food manifest");
+  }
   const foods = [];
   for (const text of csvTexts) foods.push(...parseFoodCsv(text).foods);
   if (foods.length !== Number(manifest.foodCount)) {
@@ -108,10 +110,10 @@ export function assembleFoodDatabase(manifest, csvTexts) {
       title: manifest.title,
       sheet: manifest.sheet,
       foodCount: foods.length,
-      categoryCount: manifest.files.length,
+      categoryCount: manifest.categories.length,
       basisGrams: manifest.basisGrams || 100,
     },
-    categories: manifest.files.map((c) => ({ id: c.id, name: c.name, nameAr: c.nameAr })),
+    categories: manifest.categories.map((c) => ({ id: c.id, name: c.name, nameAr: c.nameAr })),
     foods,
   };
 }

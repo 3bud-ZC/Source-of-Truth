@@ -69,11 +69,11 @@ Expected Pages URL:
 `https://3bud-zc.github.io/Source-of-Truth/`
 
 The workflow performs JavaScript syntax checks and the automated Node test suite before deployment.
+GitHub Pages source has now been set to **GitHub Actions** in repository settings. This commit intentionally triggers the first Pages deployment run on `main`.
 
 ## Remaining
 - Confirm the first GitHub Actions workflow run is created and succeeds.
 - Confirm the public GitHub Pages URL loads the application and all four nutrition chunks.
-- If Pages is not enabled yet, select **Settings → Pages → Build and deployment → GitHub Actions** and run the deployment workflow once.
 
 ## Next action
-Trigger/verify the first GitHub Pages deployment, perform a live smoke test, then mark this file **100%**.
+Verify the triggered GitHub Pages workflow and live URL, then mark this file **100%**.

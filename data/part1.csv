@@ -1,0 +1,135 @@
+sourceNumber,sourceRow,categoryId,category,name,water,energy,protein,fats,fiber,carbohydrates,sodium,potassium,calcium,phosphorus,magnesium,iron,zinc,copper,vitaminA,vitaminC,vitaminB1,vitaminB2
+1,4,c01,Cereals And Cereal-Based Food,"Barley,grains",88,335,10.7,1.5,6.5,69.6,55,299,104,184,26,4.63,2.25,0.41,0,0,0.3,0.11
+2,5,c01,Cereals And Cereal-Based Food,"Corn,grains (White)",10.7,364,10.2,4,1.9,71.9,8,125,27,254,25,2.42,1.7,0.21,0,0,0.37,0.12
+3,6,c01,Cereals And Cereal-Based Food,"Corn,grains (Yellow)",10.1,368,12.7,5.5,2.9,67,10,161,26,239,30,2.6,1.5,0.19,120,0,0.39,0.1
+4,7,c01,Cereals And Cereal-Based Food,"Corn,flakes",5,373,6.2,2.1,2,82.3,464,139,15,44,11,1.4,1,0.23,0,0,0.5,0
+5,8,c01,Cereals And Cereal-Based Food,"Corn,flour",11.1,359,8.9,2.5,1,75.2,6,95,22,183,20,2.3,1.05,0.19,0,0,0,0
+6,9,c01,Cereals And Cereal-Based Food,"Corn,Kernels,canned",74.5,100,2.8,0.9,0.8,20.1,301,82,5,65,0,0.65,0.5,0.05,25,7,0.03,0
+7,10,c01,Cereals And Cereal-Based Food,"Corn,Kernels,on cob,grilled",56.9,161,4,1,3,34.1,4,69,7,0,0,1.02,0.14,0,8,0,0,0
+8,11,c01,Cereals And Cereal-Based Food,"Corn,popped",1.8,451,9.1,16.7,2.5,66,706,158,20,293,0,1.8,1.5,0,0,0,0,0
+9,12,c01,Cereals And Cereal-Based Food,"Corn,puffed",2.7,503,7.8,25.7,1.5,60.1,687,190,32,231,0,2,1.3,0,30,0,0,0
+10,13,c01,Cereals And Cereal-Based Food,"Corn,Starch",5,380,0.2,0.1,0,94.5,5,7,0,30,0,0,0,0,0,0,0,0
+11,14,c01,Cereals And Cereal-Based Food,Macaroni,9.9,361,12,1.1,0.4,75.8,10,176,35,128,22,1.4,1.65,0.16,0,0,0.17,0
+12,15,c01,Cereals And Cereal-Based Food,"Macaroni/Tomato,cooked",59.3,169,5,3,0.7,30.5,288,95,15,66,0,0.7,0.56,0,0,0,0,0
+13,16,c01,Cereals And Cereal-Based Food,"Macaroni/Tomato/meat,cooked",61,175,6.8,5.6,0.6,24.4,342,184,30,130,0,1.1,1.05,0,0,0,0,0
+14,17,c01,Cereals And Cereal-Based Food,"Noodles,fried",52.5,218,5.1,6,0.3,36,250,88,18,42,0,0.6,0.7,0,0,0,0,0
+15,18,c01,Cereals And Cereal-Based Food,"Rice,grains (Long)",11.2,357,8.7,0.8,0.3,78.7,13,108,22,108,15,0.77,1.3,0.23,0,0,0.09,0.04
+16,19,c01,Cereals And Cereal-Based Food,"Rice,grains (short)",12.5,351,7.3,0.7,0.3,78.8,11,93,30,98,23,0.59,1.05,0.31,0,0,0.1,0.03
+17,20,c01,Cereals And Cereal-Based Food,"Rice,flour",11.6,354,7.3,0.5,0.3,80,13,80,18,106,10,0.8,0.76,0.2,0,0,0,0
+18,21,c01,Cereals And Cereal-Based Food,"Rice,fried",49.8,214,3.6,3.9,0.3,41.1,278,67,7,43,0,0.25,0.43,0,0,0,0,0
+19,22,c01,Cereals And Cereal-Based Food,"Rice,fried with noodles",49.4,219,3.5,4.5,0.3,41.1,299,75,18,52,0,0.7,0.45,0,0,0,0,0
+20,23,c01,Cereals And Cereal-Based Food,"Rice,fried with onions",53.7,203,3.1,4.6,0.6,37.2,283,42,15,62,0,1,0.8,0,0,0,0,0
+21,24,c01,Cereals And Cereal-Based Food,"Rice,fortified-baby food",4,420,16.2,10,0.5,66.4,170,780,555,460,13,7,2.2,0,375,40,0.6,0.4
+22,25,c01,Cereals And Cereal-Based Food,Rice (Koshari),61,172,6.5,5.2,1.1,24.7,324,228,10,32,0,1.4,1.3,0.2,0,0,0,0
+23,26,c01,Cereals And Cereal-Based Food,Rice (Koshari) market,63,157,4.5,3.7,0.9,26.3,401,185,8,27,0,0.82,1.11,0.12,0,0,0,0
+24,27,c01,Cereals And Cereal-Based Food,"Rice, pudding with milk",70,129,3.3,2.6,0.5,23.1,25,125,58,0,0,0.05,0,0,0,0,0,0
+25,28,c01,Cereals And Cereal-Based Food,"Rice, puffed/crisp",5,379,9,0.7,0.3,84.2,115,141,14,105,13,1.01,0.98,0.23,0,0,0,0
+26,29,c01,Cereals And Cereal-Based Food,Semolina,11,360,12,1.8,0.4,74,5,208,26,114,10,2.02,1.9,0.015,0,0,0.2,0.1
+27,30,c01,Cereals And Cereal-Based Food,"Sorghum,grains",8.9,366,10.9,3.6,2.2,72.6,10,131,40,250,23,4.4,3.06,0.41,0,0,0.21,0.1
+28,31,c01,Cereals And Cereal-Based Food,"Wheat,bran",10.2,313,14.4,3.9,10,55,60,1251,91,997,0,10.5,8,0.95,0,0,0.75,0.3
+29,32,c01,Cereals And Cereal-Based Food,"Wheat,grains",12.1,344,12,1.6,2.4,70.3,10,315,35,412,88,3.1,2.9,0.33,0,0,0.61,0.12
+30,33,c01,Cereals And Cereal-Based Food,"Wheat,grains (Belila,canned)",75.9,95,2.4,0.6,0.6,20,72,79,15,0,12,0.87,0.48,0.05,0,0,0,0
+31,34,c01,Cereals And Cereal-Based Food,"Wheat,flour (brown)",12.1,350,11.8,1.3,1.1,72.7,8,265,28,118,27,2.6,1.82,0.3,0,0,0.5,0.11
+32,35,c01,Cereals And Cereal-Based Food,"Wheat,flour (White)",11.8,354,10,1,0.4,76.3,6,120,18,92,22,0.85,1.5,0.13,0,0,0.11,0.05
+33,36,c01,Cereals And Cereal-Based Food,"Wheat,fortified-baby food",3.5,413,17,10,2.2,63.8,135,850,550,460,0,8.25,2.5,0,375,40,0.5,0.5
+34,37,c01,Cereals And Cereal-Based Food,"Wheat,Koskos plain",47,213,5.8,0.7,0.3,45.8,4,62,17,0,0,0.41,0.6,0.05,0,0,0,0
+35,38,c01,Cereals And Cereal-Based Food,"Wheat,Koskos sweet",40.6,283,5.8,9.8,0.5,42.9,7,65,15,92,0,0.4,0.58,0.06,0,0,0,0
+36,39,c01,Cereals And Cereal-Based Food,"Wheat,parboiled (Burghul)",11.8,352,12.5,1.8,1,71.4,37,350,43,405,66,3.2,4.2,0.31,0,0,0.35,0.14
+37,40,c01,Cereals And Cereal-Based Food,"Wheat,rubbed (Fereek)",10.8,351,11.6,1.7,2.1,72.4,22,300,41,320,56,3,3.5,0.3,0,0,0.57,0.12
+38,41,c01,Cereals And Cereal-Based Food,"Wheat,rubbed,cooked",53.5,199,5.3,4,1,35.4,309,115,15,120,0,1.4,1.6,0,0,0,0,0
+39,42,c01,Cereals And Cereal-Based Food,"Wheat,rubbed/meat,cooked",53,213,7.8,6.4,0.6,31,354,154,35,188,0,2.07,1.87,0,0,0,0,0
+1,45,c02,Bakery And Bakery-Based Products,"Biscuit,Chocolate coat",2.7,517,10.5,27.5,1,56.8,200,235,110,0,0,195,0.78,0,0,0,0.04,0.13
+2,46,c02,Bakery And Bakery-Based Products,"Biscuit,cream fill",2.6,509,7.3,25,0.6,63.6,130,135,62,168,0,1.6,0.5,0,0,0,0.04,0.15
+3,47,c02,Bakery And Bakery-Based Products,"Biscuit,date fill",4.5,453,6.4,15.8,1,71.2,167,246,85,0,8,2.85,0.53,0.15,0,0,0.2,0.18
+4,48,c02,Bakery And Bakery-Based Products,"Biscuit,digestive",3,468,7.5,20,3,64.6,500,200,78,0,32,320,0.7,0.2,0,0,0.15,0.09
+5,49,c02,Bakery And Bakery-Based Products,"Biscuit,nice",3.1,454,9.8,15,0.9,70,162,137,120,155,0,1.86,0.77,0,0,0,0.1,0.03
+6,50,c02,Bakery And Bakery-Based Products,"Biscuit,plain",3.5,438,9.6,11.8,0.8,73.3,129,140,109,173,0,2,0.7,0,0,0,0.08,0.05
+7,51,c02,Bakery And Bakery-Based Products,"Biscuit,plain(fe-fortified)",3.3,440,9.4,12,0.8,73.5,127,135,114,182,0,4.6,0.8,0.22,0,0,0.07,0.03
+8,52,c02,Bakery And Bakery-Based Products,"Biscuit,salted",3.9,438,10.1,13.7,0.3,68.6,869,123,25,123,0,1.41,1,0,0,0,0,0
+9,53,c02,Bakery And Bakery-Based Products,"Biscuit,salted (pretzel)",2,398,9.8,3,0.3,82.9,765,138,27,123,0,1.5,1.1,0,0,0,0,0
+10,54,c02,Bakery And Bakery-Based Products,"Biscuit,wafers chocolate coal",1.9,535,6.4,29.8,0.6,60.4,180,160,103,0,0,2.1,0.6,0,0,0,0.1,0.12
+11,55,c02,Bakery And Bakery-Based Products,"Biscuit,wafers cream fill",2,515,6.3,25.4,0.6,65.2,93,150,45,83,0,1.5,0.51,0.16,0,0,0.09,0.08
+12,56,c02,Bakery And Bakery-Based Products,"Bread,Baladi",35.3,254,8.8,1,1.3,52.5,338,236,42,134,14,2.89,1.75,0.14,0,0,0.29,0.1
+13,57,c02,Bakery And Bakery-Based Products,"Bread,Baladi,(wheat/corn)",35.1,256,9,1.3,1.4,52,369,208,47,197,13,3,2,0.19,0,0,0.31,0.12
+14,58,c02,Bakery And Bakery-Based Products,"Bread,bran dry (sin)",5,369,12.3,2.1,3.3,75.2,449,430,42,0,0,4.5,2.9,0.4,0,0,0,0
+15,59,c02,Bakery And Bakery-Based Products,"Bread,buns with sesame",32.8,273,12.5,3,1.1,49,330,0,60,0,0,2.1,0.85,0.52,0,0,0,0
+16,60,c02,Bakery And Bakery-Based Products,"Bread,corn/wheat (1:1)",12,355,9.9,2.5,1.1,73.2,452,0,53,0,0,2.4,0,0,0,0,0.29,0.12
+17,61,c02,Bakery And Bakery-Based Products,"Bread,corn/wheat (1:2)",10,360,10.1,2.8,1.9,73.7,483,234,65,147,19,3.2,1.8,0.18,0,0,0.28,0.12
+18,62,c02,Bakery And Bakery-Based Products,"Bread,corn/wheat (2:1)",12.5,351,9.8,2.9,2,71.3,474,0,55,0,0,2.5,0,0,0,0,0.28,0.11
+19,63,c02,Bakery And Bakery-Based Products,"Bread,crumb",9.7,356,10.3,2,2,74.2,501,200,76,115,15,2,1.53,0.38,0,0,0.2,0.12
+20,64,c02,Bakery And Bakery-Based Products,"Bread,french",28.8,285,8.7,1,0.3,60.3,296,125,14,94,18,0.7,1.1,0.52,0,0,0.1,0.05
+21,65,c02,Bakery And Bakery-Based Products,"Bread,lebanese",22,311,9.2,0.7,0.3,66.9,307,104,15,85,17,0.72,1.2,0.1,0,0,0.11,0.05
+22,66,c02,Bakery And Bakery-Based Products,"Bread,lebanese (brown)",25.8,293,9.4,2.1,2.5,59.1,336,186,27,0,0,3.94,2,0.44,0,0,0,0
+23,67,c02,Bakery And Bakery-Based Products,"Bread,shemi",27.3,292,8.6,0.9,0.2,62.3,350,120,16,82,16,0.7,1,0.1,0,0,0.1,0.05
+24,68,c02,Bakery And Bakery-Based Products,"Bread,shamsy",35,259,9.2,1.1,0.6,53.1,375,175,14,120,14,2.1,1.9,0.1,0,0,0.27,0.11
+25,69,c02,Bakery And Bakery-Based Products,"Bread,sliced (brow toast)",34.5,257,8.9,1.9,2.4,51.1,405,201,49,185,18,2.86,1.1,0.59,0,0,0.2,0.08
+26,70,c02,Bakery And Bakery-Based Products,"Bread,sliced (White toast)",33,270,8.4,1.5,0.5,55.6,400,152,30,0,0,1,0.9,0,0,0,0.18,0.05
+27,71,c02,Bakery And Bakery-Based Products,"Bread,sticks with seame",6.1,379,11.7,2.9,1.3,76.5,410,203,79,0,0,2.15,1.99,0.42,0,0,0,0
+28,72,c02,Bakery And Bakery-Based Products,"Bread,sticks (fayesh)",8.1,398,12,7.5,0.9,70.6,188,150,85,0,0,3.8,1.5,0,0,0,0,0
+29,73,c02,Bakery And Bakery-Based Products,"Cakes,cup",26.8,379,7,18.4,0.3,46.3,350,83,58,100,0,0.5,0,0,53,0,0.02,0.08
+30,74,c02,Bakery And Bakery-Based Products,"Cakes,sponge",32,290,7.5,4.2,0.2,55.6,159,90,58,120,0,1.19,1.04,0,93,0,0.1,0.12
+31,75,c02,Bakery And Bakery-Based Products,Flaky pastry,22,476,5.5,34,0.3,37.1,372,201,90,200,14,1.05,0.8,0.2,0,0,0,0
+32,76,c02,Bakery And Bakery-Based Products,"Pie,date (school)",21,361,9.5,10.9,1.3,56.1,285,297,59,0,0,2.11,0.18,0,32,8,0,0
+33,77,c02,Bakery And Bakery-Based Products,"Pie,fiteer,meshaltet",35.5,402,6.7,30,0.5,26.2,300,0,25,0,0,0.4,0.45,0,0,0,0,0
+34,78,c02,Bakery And Bakery-Based Products,"Pie,fiteer,market",28.6,341,7.6,12,0.4,50.7,256,0,15,0,0,0.6,0,0,0,0,0,0
+35,79,c02,Bakery And Bakery-Based Products,"Pie,Rucak with meat",51.4,279,8.5,18.6,1,19.4,422,102,72,75,0,1.2,0.64,0,0,0,0,0
+36,80,c02,Bakery And Bakery-Based Products,"Pizza,chese topping",48.5,243,12,9.9,1,26.5,583,124,231,0,0,120,1.6,0.1,0,0,0,0
+37,81,c02,Bakery And Bakery-Based Products,"Pizza,meat/sausage topping",41.5,267,10.4,9.3,1,32.4,508,157,160,0,0,1.5,1.1,0.12,0,0,0,0
+38,82,c02,Bakery And Bakery-Based Products,"Pizza,seafood topping",44,252,10,8,0.8,35.1,498,130,201,0,0,1.15,0.99,0.19,0,0,0,0
+39,83,c02,Bakery And Bakery-Based Products,"Pizza,vegetarian",47.8,230,5.9,7.1,1,35.6,476,192,154,0,0,1.15,0.95,0.8,0,0,0,0
+40,84,c02,Bakery And Bakery-Based Products,"Sandwithes,cheese white",57,180,7.5,4,1,28.5,496,190,196,0,17,1.1,1.1,0.04,0,0,0,0
+41,85,c02,Bakery And Bakery-Based Products,"Sandwithes,cheese,yellow",40,262,10.5,7,1.2,39.3,68.4,183,202,0,20,0.59,1.3,0.01,0,0,0,0
+42,86,c02,Bakery And Bakery-Based Products,"Sandwiches,fried brain",55,232,10.1,11.5,0.3,21.9,403,286,63,0,21,2.16,0.87,0.21,0,0,0,0
+43,87,c02,Bakery And Bakery-Based Products,"Sandwiches,fried chicken",45,259,9.6,10,1,32.7,590,280,20,0,29,1.93,1,0.2,0,0,0,0
+44,88,c02,Bakery And Bakery-Based Products,"Sandwiches,fried eggplant",56,123,4,5.5,0.3,31.9,615,386,27,0,12,1.35,0.96,0.06,0,0,0,0
+45,89,c02,Bakery And Bakery-Based Products,"Sandwiches,fried liver",46.7,238,14.4,6.8,0.6,29.7,599,270,53,0,50,5.6,2.3,1.87,0,0,0,0
+46,90,c02,Bakery And Bakery-Based Products,"Sandwiches,fried shrimp",47.5,252,10.2,10.5,0.7,29.1,525,285,54,0,27,2.82,1.1,0.19,0,0,0,0
+47,91,c02,Bakery And Bakery-Based Products,"Sandwiches,fried taamia",55,205,6.1,5.8,1.5,32.2,587,273,33,0,30,2.6,1.36,0.14,0,0,0,0
+48,92,c02,Bakery And Bakery-Based Products,"Sandwiches,grilled chicken",51.5,223,11.4,8,0.9,26.4,522,316,28,0,34,1.83,1.4,0.15,0,0,0,0
+49,93,c02,Bakery And Bakery-Based Products,"Sandwiches,grilled kofta",50.9,224,12,7.5,0.6,27.2,491,226,23,0,30,2.86,1.03,0.18,0,0,0,0
+50,94,c02,Bakery And Bakery-Based Products,"Sandwiches,hamburger",52.8,216,8.8,7.5,0.8,28.4,689,307,38,0,24,2,1.63,0.11,0,0,0,0
+51,95,c02,Bakery And Bakery-Based Products,"Sandwiches,hotdog",50.2,221,8.8,6.5,0.5,31.9,615,250,20,0,31,1.58,1,0.21,0,0,0,0
+52,96,c02,Bakery And Bakery-Based Products,"Sandwiches,shawerma meat",51.1,220,10.7,7,0.7,28.6,698,273,46,0,32,2.9,1.91,0.33,0,0,0,0
+53,97,c02,Bakery And Bakery-Based Products,"Sandwiches,stewed foul",56.2,173,5,2.2,1.5,33.3,669,300,43,0,29,2.05,1.24,0.12,0,0,0,0
+1,100,c03,TUBERS AND TUBER-BASED FOOD,Chufa tuber (Hab-alaziz),5.3,413,5.7,16.2,9.3,61.1,51,0,27,0,0,5.8,2.19,0,0,0,0,0
+2,101,c03,TUBERS AND TUBER-BASED FOOD,"Chufa tuber ,wet",35.6,278,4,9.3,5,44.6,0,0,0,0,0,3.5,1.32,0,0,0,0,0
+3,102,c03,TUBERS AND TUBER-BASED FOOD,Colocasia,79.1,77,2.1,0.2,0.8,16.6,14,495,62,60,13,1,0.5,0.08,11,6,0.15,0.05
+4,103,c03,TUBERS AND TUBER-BASED FOOD,"Colocasia,coocked",81,91,2.5,4.4,0.3,10.3,375,340,58,64,0,1,0.32,0,0,0,0,0
+5,104,c03,TUBERS AND TUBER-BASED FOOD,potatoes,80.5,7.3,1.6,0.1,0.6,16.4,8,420,7,46,16,0.6,0.32,0.15,2,18,0.09,0.04
+6,105,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,chips",1.5,55.7,5.5,37.5,1.6,49.4,65.4,1100,37,143,53,1.7,0.9,0.25,0,0,0.21,0.05
+7,106,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,fries",45.2,281,4.1,14.5,1,33.4,290,627,13,0,0,1.2,0.3,0,0,0,0,0
+8,107,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,cooked with tomato",76.6,104,1.2,3.5,0.4,16.9,369,394,10,72,0,0.7,0.5,0,0,0,0,0
+9,108,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,cooked with milk",81,80,2.2,1.9,0.4,33.6,317,321,48,54,0,0.65,0.56,0,0,0,0,0
+10,109,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,mashed/meat/egg",76.7,121,6,7,0.5,8.4,377,422,26,78,0,0.5,0,0,0,0,0,0
+11,110,c03,TUBERS AND TUBER-BASED FOOD,"potatoes,meat stuff",76.2,115,3.1,5,0.6,14.5,339,407,18,54,0,1.8,0.77,0,0,0,0,0
+12,111,c03,TUBERS AND TUBER-BASED FOOD,sweespotatos,70.5,112,1.8,0.3,0.9,25.5,13,398,39,40,25,0.8,0.3,0.11,570,24,0.11,0.06
+1,114,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad",10.3,326,24.1,1.5,6.9,54,35,724,85,386,148,5.8,3.14,0.29,9,5,0.48,0.28
+2,115,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad (Bisara)",68,130,6,4,3,17.4,290,187,25,0,0,1.2,0.2,0,0,8,0,0
+3,116,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad,decorticated",10.4,316,25.9,2,2.8,56.2,39,640,92,359,126,4.8,2.9,0.18,13,2,0.41,0.13
+4,117,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad (fcul),canned",70,132,6.1,5,2.1,15.7,335,275,44,175,49,2.7,0.9,0,0,0,0.12,0.08
+5,118,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad (foal medames)",73.7,98,5.6,0.7,2,17.2,24,218,37,183,0,2.4,1,0,0,0,0,0
+6,119,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad (Menabet)",61,145,10.4,0.7,2.9,24.2,14,290,34,154,59,2.3,1.05,0.12,5,3,0.2,0.22
+7,120,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,broad (Nabet) cooked",70,114,8.8,0.6,1,18.4,330,218,37,166,0,2.4,1,0,0,0,0,0
+8,121,c04,LEGOMES AND LEGUME-BASED FOOD,"beans,broad (taamia),fried",32.7,355,10.9,20.1,1.5,32.6,524,258,24,118,41,2.7,1.16,0.4,0,6,0,0
+9,122,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,kidney (red)",11.6,323,23.1,1.3,5.8,54.8,20,1309,120,374,136,6.5,2.01,0,0,3,0.62,0.21
+10,123,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,Kidney (White)",10.8,333,22.1,1.4,4.2,58,36,1270,148,415,142,7.2,3.4,0.78,0,2,0.58,0.26
+11,124,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,kidney white,cooked",66,134,8.9,2.4,1.9,19.3,324,504,57,139,0,2.5,1.13,0,0,0,0,0
+12,125,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,kidney white/meat",65.6,152,11.4,5.6,2,14,371,566,59,167,0,2.96,1.41,0,0,0,0,0
+13,126,c04,LEGOMES AND LEGUME-BASED FOOD,"Beans,mung",7.2,352,21.4,2,4,62.1,32,1354,168,293,98,5,2.9,0,12,4,0.27,0.19
+14,127,c04,LEGOMES AND LEGUME-BASED FOOD,Chickpeas,8.6,352,20.3,4.2,5.3,58.3,50,962,127,352,122,6.7,4.7,1.25,10,4,0.41,0.29
+15,128,c04,LEGOMES AND LEGUME-BASED FOOD,"Chickpeas,(Homos sham)",64.2,138,7.6,1.6,2.1,23.9,405,380,48,151,43,2.5,1.82,0.17,T,0,0.12,0.29
+16,129,c04,LEGOMES AND LEGUME-BASED FOOD,"Chickpeas,yellow",10.5,354,19.6,4.4,3.4,59,34,855,155,430,130,5.8,3.4,1.3,19,2,0.48,0.21
+17,130,c04,LEGOMES AND LEGUME-BASED FOOD,Cowpeas,11.3,330,23,1.2,4.7,56.7,30,1217,104,347,136,6.8,3.22,0.46,3,2,0.75,0.21
+18,131,c04,LEGOMES AND LEGUME-BASED FOOD,"Cowpeas,cooked",68,131,8.5,3.5,2,16.4,343,579,37,96,34,2.2,1.07,0,0,0,0,0
+19,132,c04,LEGOMES AND LEGUME-BASED FOOD,"Cowpeas,cooked with meat",66,146,11,5.5,2.5,13,317,456,26,142,0,3.5,1.54,0,0,0,0,0
+20,133,c04,LEGOMES AND LEGUME-BASED FOOD,Fenugreek,9.4,356,25.6,6.7,6.5,48.3,93,966,197,365,115,14,4.6,0.4,132,4,0.27,0.52
+21,134,c04,LEGOMES AND LEGUME-BASED FOOD,"Lentils,nu-peeld",10,340,22.4,1.1,3.8,60,30,725,48,327,86,7.3,4.2,0.25,12,0,0.4,0.22
+22,135,c04,LEGOMES AND LEGUME-BASED FOOD,"Lentils,nu-peeld,cooked",65,151,5.8,5.6,2.3,19.3,440,372,45,164,0,3.1,1.5,0,0,0,0,0
+23,136,c04,LEGOMES AND LEGUME-BASED FOOD,"Lentils,peeled (yellow)",11.5,340,22.9,0.7,2.1,60.5,41,765,50,330,82,6.8,3.2,0.35,15,0,0.41,0.18
+24,137,c04,LEGOMES AND LEGUME-BASED FOOD,"Lentils,peeled/rice cooked",68.9,140,6.2,5.2,1.2,17.1,312,384,12,57,0,1.1,0.8,0,0,0,0,0
+25,138,c04,LEGOMES AND LEGUME-BASED FOOD,"Lentils,peeled soup",82.5,68,4.8,1.5,0.7,8.8,318,245,26,76,0,1.8,0.6,0,0,0,0,0
+26,139,c04,LEGOMES AND LEGUME-BASED FOOD,Lupines,8,355,38,9,11,30.5,94,605,270,490,189,5.82,2.87,0.37,0,0,0.41,0.48
+27,140,c04,LEGOMES AND LEGUME-BASED FOOD,"Lupines,(Termis)",70.7,111,9.6,2.7,3,12,580,200,89,128,53,1.58,0.8,0.24,0,5,0.15,0.1
+28,141,c04,LEGOMES AND LEGUME-BASED FOOD,peas,10,345,22.1,2.1,3.9,59.4,32,928,82,352,125,5.5,3.15,0.75,34,4,0.84,0.25
+29,142,c04,LEGOMES AND LEGUME-BASED FOOD,soybeans,9.3,426,31.7,19.9,4.3,30.1,21,1618,305,563,258,7.5,2,0,0,0,0.8,0.32
+30,143,c04,LEGOMES AND LEGUME-BASED FOOD,"soybeans,flour",7.5,362,44.5,3.9,2.8,37.1,28,1870,268,424,303,8.33,1.2,0,0,0,0.83,0.29

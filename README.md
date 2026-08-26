@@ -8,7 +8,7 @@ Static Arabic-first food analysis web app built from the supplied **Food Composi
 - Add foods to a daily analysis and enter quantity in grams.
 - Calculate energy, macros, minerals, and vitamins automatically using:
   `calculated value = source value × grams / 100`
-- Show running totals instantly after each saved quantity change.
+- Show running totals instantly after each quantity change.
 - Save multiple days locally in the browser.
 - Configure optional reference targets and view total / target / difference.
 - Export the current day as CSV.
@@ -19,11 +19,7 @@ Static Arabic-first food analysis web app built from the supplied **Food Composi
 
 ## Source of truth
 
-The original workbook is committed at:
-
-`source/food-composition-egypt.xlsx`
-
-Runtime data is generated from **Sheet1** into:
+The supplied workbook (`Sheet1`) was normalized into the committed runtime snapshot:
 
 `data/manifest.json` + `data/part*.csv`
 
@@ -33,19 +29,25 @@ Current normalized dataset:
 - **15 categories**
 - **18 nutritional fields**
 - Source basis: **100 g**
+- Original workbook SHA-256: `5a77ca42716fdc4d53ecdeca6d97c28f17dc53f5542f19bcb5e2d2f1bc09568d`
 
-The workbook contains one qualitative `T` (Trace) value. The importer preserves that marker in
-`traceNutrients` / `rawQualitativeValues` and uses numeric `0` only for arithmetic totals because the source provides no numeric magnitude. The UI shows a trace notice when that food is selected.
+The original XLSX is not required by the deployed website. The normalized runtime snapshot is committed so GitHub Pages remains fully static.
+
+The workbook contains one qualitative `T` (Trace) value. The importer preserves that marker in `traceNutrients` / `rawQualitativeValues` and uses numeric `0` only for arithmetic totals because the source provides no numeric magnitude. The UI shows a trace notice when that food is selected.
 
 ## Regenerate the data
 
-No third-party Python packages are required.
+The importer uses only the Python standard library. To regenerate after receiving an updated workbook, place the workbook at:
+
+`source/food-composition-egypt.xlsx`
+
+Then run:
 
 ```bash
 python3 scripts/import-foods.py
 ```
 
-Verify that the committed runtime data exactly matches the workbook:
+Verify the generated runtime snapshot against that workbook:
 
 ```bash
 python3 scripts/import-foods.py --check
@@ -79,15 +81,9 @@ Deployment is configured in:
 
 `.github/workflows/deploy-pages.yml`
 
-Every push to `main`:
+Every push to `main` runs syntax checks and the Node test suite before deploying the static site to GitHub Pages.
 
-1. checks out the repository,
-2. verifies the generated manifest and CSV chunks against the XLSX source,
-3. runs the Node test suite,
-4. uploads the static site,
-5. deploys it to GitHub Pages.
-
-Expected public URL after Pages is enabled and the workflow completes:
+Expected public URL:
 
 `https://3bud-zc.github.io/Source-of-Truth/`
 

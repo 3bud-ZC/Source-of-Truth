@@ -4,7 +4,7 @@
 Egypt Food Analyzer / محلل الأغذية المصري
 
 ## Completion
-**95% — Release candidate committed locally; live GitHub Pages deployment still needs verification after push.**
+**98% — application, source-derived runtime dataset, tests, and GitHub Pages workflow are committed. Live Pages deployment is the only remaining verification.**
 
 ## Implemented
 - Arabic-first RTL static web application.
@@ -27,32 +27,40 @@ Egypt Food Analyzer / محلل الأغذية المصري
 - Mobile responsive food cards and expandable micronutrients.
 - Source-trace handling for qualitative `T` values.
 - GitHub Pages deployment workflow.
-- Source XLSX retained in repository.
-- Deterministic XLSX → JSON import script using Python standard library only.
+- Deterministic XLSX → split CSV/manifest importer using Python standard library only.
 
 ## Source Dataset
-- Workbook: `source/food-composition-egypt.xlsx`
-- Worksheet: `Sheet1`
+- Worksheet used: `Sheet1`
+- Runtime source snapshot: `data/manifest.json` + `data/part1.csv` through `data/part4.csv`
 - Normalized food records: **470**
 - Categories: **15**
 - Nutrient fields: **18**
 - Basis: **100 g**
-- Workbook SHA-256: `5a77ca42716fdc4d53ecdeca6d97c28f17dc53f5542f19bcb5e2d2f1bc09568d`
+- Original uploaded workbook SHA-256: `5a77ca42716fdc4d53ecdeca6d97c28f17dc53f5542f19bcb5e2d2f1bc09568d`
+- The original XLSX is not required by the deployed static website.
 
 ### Data integrity
-All 470 normalized records were compared against the uploaded workbook values through an independent workbook read during development: **0 mismatches**.
+All 470 normalized records were compared against the uploaded workbook values during development: **0 mismatches**.
 
 One source value is qualitative:
 - `Chickpeas,(Homos sham)` — Vitamin A = `T` (Trace)
-- The marker is preserved in the generated dataset.
+- The marker is preserved in the runtime dataset.
 - No numeric amount was invented.
 
 ## Verification
-- `python3 scripts/import-foods.py --check` → PASS
+- `python3 scripts/import-foods.py --check` against the supplied workbook → PASS
 - `npm test` → **7/7 PASS**
 - `node --check app.js` → PASS
+- `node --check data.js` → PASS
 - `node --check nutrition.js` → PASS
-- Local HTTP smoke test for `/` and `/data/foods.json` → PASS
+- Local HTTP smoke test for `/` and `/data/manifest.json` → PASS
+
+## GitHub Repository
+Repository: `3bud-ZC/Source-of-Truth`
+Branch: `main`
+
+The complete runtime dataset is committed, including `data/part4.csv`.
+The app reads `manifest.chunks`, so the committed runtime data format matches the browser loader and test suite.
 
 ## Deployment
 Workflow: `.github/workflows/deploy-pages.yml`
@@ -60,10 +68,12 @@ Workflow: `.github/workflows/deploy-pages.yml`
 Expected Pages URL:
 `https://3bud-zc.github.io/Source-of-Truth/`
 
+The workflow performs JavaScript syntax checks and the automated Node test suite before deployment.
+
 ## Remaining
-- Push this implementation to `main`.
-- Verify the GitHub Actions Pages workflow completes successfully.
-- If GitHub Pages has never been enabled for this repository, set Pages source to **GitHub Actions** once in repository settings and rerun the workflow.
+- Confirm the first GitHub Actions workflow run is created and succeeds.
+- Confirm the public GitHub Pages URL loads the application and all four nutrition chunks.
+- If Pages is not enabled yet, select **Settings → Pages → Build and deployment → GitHub Actions** and run the deployment workflow once.
 
 ## Next action
-Push the release candidate to `main`, inspect the resulting workflow run, then update this file to 100% only after the live Pages URL is verified.
+Trigger/verify the first GitHub Pages deployment, perform a live smoke test, then mark this file **100%**.

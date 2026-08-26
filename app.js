@@ -7,6 +7,7 @@ import {
   csvNumber,
   normalizeGrams,
 } from "./nutrition.js";
+import { assembleFoodDatabase } from "./data.js";
 
 const STORAGE_KEY = "egypt-food-analyzer:v1";
 const el = (id) => document.getElementById(id);
@@ -418,9 +419,15 @@ function bindEvents() {
 
 async function init() {
   try {
-    const res = await fetch("./data/foods.json");
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    db = await res.json();
+    const manifestRes = await fetch("./data/manifest.json");
+    if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
+    const manifest = await manifestRes.json();
+    const csvTexts = await Promise.all(manifest.files.map(async (entry) => {
+      const res = await fetch(`./data/${entry.file}`);
+      if (!res.ok) throw new Error(`${entry.file} HTTP ${res.status}`);
+      return res.text();
+    }));
+    db = assembleFoodDatabase(manifest, csvTexts);
     foodLookup = new Map(db.foods.map((f) => [f.id, f]));
     renderCategoryOptions();
     renderTableHead();

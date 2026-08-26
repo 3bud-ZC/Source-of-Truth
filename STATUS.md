@@ -4,7 +4,7 @@
 Egypt Food Analyzer / محلل الأغذية المصري
 
 ## Completion
-**98% — application, source-derived runtime dataset, tests, and GitHub Pages workflow are committed. Live Pages deployment is the only remaining verification.**
+**99% — core product is complete and the responsive redesign is committed. Only redeploying the latest UI revision and live-device verification remain.**
 
 ## Implemented
 - Arabic-first RTL static web application.
@@ -29,6 +29,20 @@ Egypt Food Analyzer / محلل الأغذية المصري
 - GitHub Pages deployment workflow.
 - Deterministic XLSX → split CSV/manifest importer using Python standard library only.
 
+## Responsive / UI Upgrade
+Latest redesign committed to `main` includes:
+- Stronger visual hierarchy and modern nutrition-dashboard styling.
+- Refined green system, spacing, shadows, borders, and section hierarchy.
+- Improved sticky desktop header and table presentation.
+- Better desktop control layout and metric cards.
+- Mobile-first layouts for 700 px, 430 px, and 360 px breakpoints.
+- Dedicated mobile food cards instead of squeezing the desktop nutrient table.
+- Fixed mobile bottom navigation for Add Food / Totals / Reference Values.
+- Mobile quantity `-10 g` / `+10 g` controls injected by `mobile.js`.
+- Mobile-safe-area handling for modern iPhone/Android browsers.
+- Better dialogs, search results, empty states, reference cards, and touch targets.
+- Improved printable mode preserved.
+
 ## Source Dataset
 - Worksheet used: `Sheet1`
 - Runtime source snapshot: `data/manifest.json` + `data/part1.csv` through `data/part4.csv`
@@ -37,7 +51,6 @@ Egypt Food Analyzer / محلل الأغذية المصري
 - Nutrient fields: **18**
 - Basis: **100 g**
 - Original uploaded workbook SHA-256: `5a77ca42716fdc4d53ecdeca6d97c28f17dc53f5542f19bcb5e2d2f1bc09568d`
-- The original XLSX is not required by the deployed static website.
 
 ### Data integrity
 All 470 normalized records were compared against the uploaded workbook values during development: **0 mismatches**.
@@ -48,6 +61,7 @@ One source value is qualitative:
 - No numeric amount was invented.
 
 ## Verification
+Previously verified core release:
 - `python3 scripts/import-foods.py --check` against the supplied workbook → PASS
 - `npm test` → **7/7 PASS**
 - `node --check app.js` → PASS
@@ -55,25 +69,32 @@ One source value is qualitative:
 - `node --check nutrition.js` → PASS
 - Local HTTP smoke test for `/` and `/data/manifest.json` → PASS
 
+Latest workflow now also includes:
+- `node --check mobile.js`
+
 ## GitHub Repository
 Repository: `3bud-ZC/Source-of-Truth`
 Branch: `main`
 
-The complete runtime dataset is committed, including `data/part4.csv`.
-The app reads `manifest.chunks`, so the committed runtime data format matches the browser loader and test suite.
+Latest UI files:
+- `index.html`
+- `styles.css`
+- `mobile.js`
 
 ## Deployment
 Workflow: `.github/workflows/deploy-pages.yml`
 
-Expected Pages URL:
+Public URL:
 `https://3bud-zc.github.io/Source-of-Truth/`
 
-The workflow performs JavaScript syntax checks and the automated Node test suite before deployment.
-GitHub Pages source has now been set to **GitHub Actions** in repository settings. This commit intentionally triggers the first Pages deployment run on `main`.
+GitHub Pages is configured to use **GitHub Actions**.
+The first deployment run completed successfully before the latest responsive redesign.
+Because the latest connector commits did not automatically create a new workflow run, the latest design revision still needs one manual workflow run from the Actions tab.
 
 ## Remaining
-- Confirm the first GitHub Actions workflow run is created and succeeds.
-- Confirm the public GitHub Pages URL loads the application and all four nutrition chunks.
+- Run `Deploy GitHub Pages` once from the Actions tab on `main` to publish the latest redesign.
+- Verify the latest revision on a real mobile device at approximately 360–430 px width.
+- Verify desktop after the new deployment.
 
 ## Next action
-Verify the triggered GitHub Pages workflow and live URL, then mark this file **100%**.
+Run the Pages workflow once, open the live site on phone and desktop, then perform the final visual QA and mark this file **100%**.

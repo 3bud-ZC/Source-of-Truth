@@ -2,8 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { calculateFood, calculateTotals, NUTRIENTS } from "../nutrition.js";
+import { assembleFoodDatabase } from "../data.js";
 
-const db = JSON.parse(fs.readFileSync(new URL("../data/foods.json", import.meta.url), "utf8"));
+const dataDir = new URL("../data/", import.meta.url);
+const manifest = JSON.parse(fs.readFileSync(new URL("manifest.json", dataDir), "utf8"));
+const csvTexts = manifest.files.map((entry) => fs.readFileSync(new URL(entry.file, dataDir), "utf8"));
+const db = assembleFoodDatabase(manifest, csvTexts);
 const lookup = new Map(db.foods.map((f) => [f.id, f]));
 const sample = db.foods.find((f) => f.name === "Barley,grains");
 
@@ -12,6 +16,7 @@ test("dataset contains the normalized Sheet1 records", () => {
   assert.equal(db.foods.length, 470);
   assert.equal(db.meta.categoryCount, 15);
   assert.equal(db.categories.length, 15);
+  assert.equal(manifest.files.reduce((sum, f) => sum + f.count, 0), 470);
 });
 
 test("every food has unique id and numeric nutrient values", () => {

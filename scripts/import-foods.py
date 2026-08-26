@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Normalize Sheet1 from the source XLSX into data/foods.json using stdlib only."""
+"""Normalize Sheet1 from the source XLSX into split runtime CSV files using stdlib only."""
 from __future__ import annotations
-import argparse, json, re, sys, zipfile
+import argparse, csv, io, json, re, sys, zipfile
+from collections import OrderedDict
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "source" / "food-composition-egypt.xlsx"
-OUTPUT = ROOT / "data" / "foods.json"
+DEFAULT_SOURCE = ROOT / "source" / "food-composition-egypt.xlsx"
+DATA_DIR = ROOT / "data"
 
 CATEGORY_AR = {
     "Cereals And Cereal-Based Food": "الحبوب ومنتجاتها",
@@ -31,8 +32,11 @@ FIELDS = [
     "calcium","phosphorus","magnesium","iron","zinc","copper","vitaminA","vitaminC",
     "vitaminB1","vitaminB2"
 ]
-NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-      "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
+HEADER = ["sourceNumber","sourceRow","categoryId","category","name",*FIELDS]
+NS = {
+    "m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+    "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+}
 
 def col_index(ref: str) -> int:
     letters = re.match(r"[A-Z]+", ref).group(0)
@@ -46,10 +50,7 @@ def shared_strings(zf: zipfile.ZipFile):
         root = ET.fromstring(zf.read("xl/sharedStrings.xml"))
     except KeyError:
         return []
-    out = []
-    for si in root.findall("m:si", NS):
-        out.append("".join((t.text or "") for t in si.iterfind(".//m:t", NS)))
-    return out
+    return ["".join((t.text or "") for t in si.iterfind(".//m:t", NS)) for si in root.findall("m:si", NS)]
 
 def first_sheet_path(zf: zipfile.ZipFile) -> str:
     wb = ET.fromstring(zf.read("xl/workbook.xml"))
@@ -96,68 +97,86 @@ def read_rows(path: Path):
             rows.append((int(row.attrib["r"]), cells))
         return rows
 
-def build():
-    foods, categories = [], []
+def build(source: Path):
+    categories = []
+    rows_by_category = OrderedDict()
     current = None
-    cat_idx = -1
-    for rownum, row in read_rows(SOURCE):
+    category_index = -1
+    for rownum, row in read_rows(source):
         a, b = row[0], row[1]
         if isinstance(a, str) and row[2] == "g" and row[3] == "Kcal":
             current = a.strip()
-            cat_idx += 1
-            categories.append({"id": f"c{cat_idx+1:02d}", "name": current, "nameAr": CATEGORY_AR.get(current, current)})
+            category_index += 1
+            cid = f"c{category_index+1:02d}"
+            categories.append({"id": cid, "name": current, "nameAr": CATEGORY_AR.get(current, current)})
+            rows_by_category[cid] = []
             continue
         if isinstance(a, (int, float)) and not isinstance(a, bool) and isinstance(b, str) and b.strip():
-            values, trace, raw_quality = {}, [], {}
+            nutrients = []
             for key, val in zip(FIELDS, row[2:20]):
                 if isinstance(val, (int, float)) and not isinstance(val, bool):
-                    values[key] = float(val)
+                    nutrients.append(int(val) if float(val).is_integer() else val)
                 elif isinstance(val, str) and val.strip().upper() == "T":
-                    values[key] = 0.0
-                    trace.append(key)
-                    raw_quality[key] = val.strip()
+                    nutrients.append("T")
                 else:
                     raise ValueError(f"Unexpected value at row {rownum}, {key}: {val!r}")
-            item = {
-                "id": f"r{rownum:03d}",
-                "sourceNumber": int(a), "sourceRow": rownum,
-                "categoryId": f"c{cat_idx+1:02d}", "category": current,
-                "categoryAr": CATEGORY_AR.get(current, current), "name": b.strip(),
-                **values,
-            }
-            if trace:
-                item["traceNutrients"] = trace
-                item["rawQualitativeValues"] = raw_quality
-            foods.append(item)
-    return {
-        "meta": {
-            "title": "Food Composition tables For Egypt",
-            "sheet": "Sheet1", "foodCount": len(foods), "categoryCount": len(categories),
-            "basisGrams": 100,
-            "qualitativeHandling": "A source value of 'T' means trace. It is preserved in traceNutrients/rawQualitativeValues and treated as 0 only for arithmetic totals because the source provides no numeric magnitude."
-        },
-        "categories": categories, "foods": foods,
-    }
+            cid = f"c{category_index+1:02d}"
+            rows_by_category[cid].append([int(a), rownum, cid, current, b.strip(), *nutrients])
+    return categories, rows_by_category
 
-def encoded(data):
-    return json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"
+def csv_text(rows):
+    out = io.StringIO(newline="")
+    writer = csv.writer(out, lineterminator="\n")
+    writer.writerow(HEADER)
+    writer.writerows(rows)
+    return out.getvalue()
+
+def outputs(source: Path):
+    categories, rows_by_category = build(source)
+    files = {}
+    manifest_files = []
+    for cat in categories:
+        cid = cat["id"]
+        filename = f"{cid}.csv"
+        files[filename] = csv_text(rows_by_category[cid])
+        manifest_files.append({**cat, "file": filename, "count": len(rows_by_category[cid])})
+    manifest = {
+        "title": "Food Composition tables For Egypt",
+        "sheet": "Sheet1",
+        "foodCount": sum(len(v) for v in rows_by_category.values()),
+        "categoryCount": len(categories),
+        "basisGrams": 100,
+        "files": manifest_files,
+    }
+    files["manifest.json"] = json.dumps(manifest, ensure_ascii=False, separators=(",", ":")) + "\n"
+    return files, manifest
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--check", action="store_true", help="Fail if data/foods.json differs from the source workbook")
+    parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE, help="Path to the source XLSX workbook")
+    parser.add_argument("--check", action="store_true", help="Fail if committed runtime data differs from the source workbook")
     args = parser.parse_args()
-    built = encoded(build())
+    if not args.source.exists():
+        print(f"Source workbook not found: {args.source}", file=sys.stderr)
+        raise SystemExit(2)
+
+    built, manifest = outputs(args.source)
     if args.check:
-        current = OUTPUT.read_text(encoding="utf-8") if OUTPUT.exists() else ""
-        if current != built:
-            print("data/foods.json is out of date. Run: python3 scripts/import-foods.py", file=sys.stderr)
+        mismatches = []
+        for name, content in built.items():
+            path = DATA_DIR / name
+            if not path.exists() or path.read_text(encoding="utf-8") != content:
+                mismatches.append(name)
+        if mismatches:
+            print("Runtime data is out of date: " + ", ".join(mismatches), file=sys.stderr)
             raise SystemExit(1)
-        data = json.loads(built)
-        print(f"OK: {data['meta']['foodCount']} foods, {data['meta']['categoryCount']} categories; JSON matches source workbook.")
+        print(f"OK: {manifest['foodCount']} foods, {manifest['categoryCount']} categories; runtime data matches source workbook.")
         return
-    OUTPUT.write_text(built, encoding="utf-8")
-    data = json.loads(built)
-    print(f"Wrote {OUTPUT}: {data['meta']['foodCount']} foods, {data['meta']['categoryCount']} categories.")
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    for name, content in built.items():
+        (DATA_DIR / name).write_text(content, encoding="utf-8")
+    print(f"Wrote {manifest['foodCount']} foods across {manifest['categoryCount']} category files.")
 
 if __name__ == "__main__":
     main()

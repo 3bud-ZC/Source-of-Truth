@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#143d2b" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#123d2a" />
   <meta name="description" content="محلل أغذية سريع مبني على جدول Food Composition Tables for Egypt." />
   <title>محلل الأغذية المصري</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='22' width='100' height='100' fill='%23143d2b'/><path d='M28 64c0-20 12-35 31-35 7 0 12 2 16 5-2 23-14 38-34 38-5 0-9-3-13-8Z' fill='%23f3f7f4'/><path d='M33 69c9-13 21-23 36-29' stroke='%23143d2b' stroke-width='5' fill='none'/></svg>">
@@ -18,23 +18,24 @@
         <div class="brand-mark" aria-hidden="true">غ</div>
         <div>
           <h1>محلل الأغذية المصري</h1>
-          <p>تحليل سريع للوجبات بالجرام — بدون حسابات يدوية</p>
+          <p>تحليل غذائي سريع ودقيق بالجرام — بدون حسابات يدوية</p>
         </div>
       </div>
-      <div class="header-actions">
+      <div class="header-actions" aria-label="إجراءات سريعة">
         <button class="btn btn-ghost" id="printBtn" type="button">طباعة</button>
-        <button class="btn btn-ghost" id="exportCsvBtn" type="button">CSV تصدير</button>
-        <button class="btn btn-primary" id="targetsBtn" type="button">القيم المرجعية</button>
+        <button class="btn btn-ghost" id="exportCsvBtn" type="button">تصدير CSV</button>
+        <button class="btn btn-light" id="targetsBtn" type="button">القيم المرجعية</button>
       </div>
     </div>
   </header>
 
   <main class="shell main-layout">
-    <section class="panel control-panel" aria-labelledby="analysisHeading">
+    <section class="panel control-panel" id="controlsSection" aria-labelledby="analysisHeading">
       <div class="panel-heading">
         <div>
           <span class="eyebrow">التحليل الحالي</span>
           <h2 id="analysisHeading">أضف الأصناف وحدد الكمية</h2>
+          <p class="section-subtitle">اختر أي صنف من قاعدة البيانات، أدخل الوزن بالجرام، وسيتم حساب كل العناصر تلقائيًا.</p>
         </div>
         <div class="day-controls">
           <label class="sr-only" for="daySelect">اليوم المحفوظ</label>
@@ -51,20 +52,20 @@
           <label for="foodSearch">ابحث عن صنف غذائي</label>
           <div class="search-input-wrap">
             <span aria-hidden="true">⌕</span>
-            <input id="foodSearch" type="search" autocomplete="off" placeholder="مثال: Rice, Bread, Chicken..." />
+            <input id="foodSearch" type="search" autocomplete="off" enterkeyhint="search" placeholder="مثال: Rice, Bread, Chicken..." />
             <kbd>/</kbd>
           </div>
           <div id="searchResults" class="search-results" hidden></div>
         </div>
 
-        <div>
+        <div class="category-field">
           <label for="categorySelect">التصنيف</label>
           <select id="categorySelect" class="select">
             <option value="">كل التصنيفات</option>
           </select>
         </div>
 
-        <div class="selected-stat">
+        <div class="selected-stat" aria-label="عدد الأصناف المضافة">
           <span>عدد الأصناف</span>
           <strong id="selectedCount">٠</strong>
         </div>
@@ -72,27 +73,31 @@
         <button id="clearDayBtn" class="btn btn-danger-outline" type="button">مسح اليوم</button>
       </div>
 
-      <p class="data-note">
-        البيانات الغذائية من <b>Food Composition Tables for Egypt — Sheet1</b>. القيم محسوبة تناسبيًا حسب الوزن المدخل.
-      </p>
+      <div class="source-strip">
+        <span class="source-dot" aria-hidden="true"></span>
+        <p class="data-note">
+          البيانات الغذائية من <b>Food Composition Tables for Egypt — Sheet1</b>. القيم محسوبة تناسبيًا حسب الوزن المدخل.
+        </p>
+      </div>
       <div id="traceNotice" class="trace-notice" hidden>
         يوجد صنف يحتوي قيمة <b>T (Trace)</b> في المصدر. نحافظ عليها كقيمة نوعية ولا نضيف رقمًا مخترعًا للإجمالي.
       </div>
     </section>
 
-    <section class="summary-grid" aria-label="ملخص التحليل">
-      <article class="summary-card accent"><span>السعرات</span><strong id="sumEnergy">٠</strong><small>kcal</small></article>
-      <article class="summary-card"><span>البروتين</span><strong id="sumProtein">٠</strong><small>g</small></article>
-      <article class="summary-card"><span>الكربوهيدرات</span><strong id="sumCarbs">٠</strong><small>g</small></article>
-      <article class="summary-card"><span>الدهون</span><strong id="sumFats">٠</strong><small>g</small></article>
-      <article class="summary-card"><span>الألياف</span><strong id="sumFiber">٠</strong><small>g</small></article>
+    <section class="summary-grid" id="summarySection" aria-label="ملخص التحليل">
+      <article class="summary-card accent"><div class="summary-icon" aria-hidden="true">⚡</div><span>السعرات</span><strong id="sumEnergy">٠</strong><small>kcal</small></article>
+      <article class="summary-card"><div class="summary-icon" aria-hidden="true">P</div><span>البروتين</span><strong id="sumProtein">٠</strong><small>g</small></article>
+      <article class="summary-card"><div class="summary-icon" aria-hidden="true">C</div><span>الكربوهيدرات</span><strong id="sumCarbs">٠</strong><small>g</small></article>
+      <article class="summary-card"><div class="summary-icon" aria-hidden="true">F</div><span>الدهون</span><strong id="sumFats">٠</strong><small>g</small></article>
+      <article class="summary-card"><div class="summary-icon" aria-hidden="true">Fi</div><span>الألياف</span><strong id="sumFiber">٠</strong><small>g</small></article>
     </section>
 
-    <section class="panel analysis-panel">
+    <section class="panel analysis-panel" id="analysisSection">
       <div class="section-title">
         <div>
           <span class="eyebrow">تفاصيل العناصر</span>
           <h2>جدول التحليل الغذائي</h2>
+          <p class="section-subtitle">الصفوف تُحسب من الوزن الفعلي لكل صنف، والمجموع يتحدث تلقائيًا.</p>
         </div>
         <span class="table-hint">اسحب الجدول أفقيًا لرؤية العناصر الدقيقة</span>
       </div>
@@ -114,11 +119,12 @@
       <div id="mobileCards" class="mobile-cards" hidden></div>
     </section>
 
-    <section class="panel targets-summary-panel">
+    <section class="panel targets-summary-panel" id="targetsSection">
       <div class="section-title">
         <div>
           <span class="eyebrow">مقارنة اختيارية</span>
           <h2>الإجمالي مقابل القيم المرجعية</h2>
+          <p class="section-subtitle">استخدم القيم المرجعية التي تحددها أنت لمقارنة اليوم الحالي بسرعة.</p>
         </div>
         <button class="btn btn-secondary" id="targetsBtn2" type="button">تعديل القيم</button>
       </div>
@@ -137,6 +143,12 @@
       </div>
     </section>
   </main>
+
+  <nav class="mobile-dock" aria-label="التنقل السريع">
+    <button type="button" data-mobile-action="search"><span aria-hidden="true">⌕</span><b>إضافة صنف</b></button>
+    <button type="button" data-mobile-action="summary"><span aria-hidden="true">Σ</span><b>الإجمالي</b></button>
+    <button type="button" data-mobile-action="targets"><span aria-hidden="true">◎</span><b>القيم</b></button>
+  </nav>
 
   <dialog id="targetsDialog" class="dialog">
     <form method="dialog" class="dialog-card" id="targetsForm">
